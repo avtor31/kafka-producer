@@ -1,0 +1,34 @@
+$ winpty docker exec -ti kafka sh  - войти внутрь контейнера kafka
+
+$ ls – показать список директорий
+/ # ls
+
+bin    dev    etc    home   kafka  lib    lib64  media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+
+
+
+$ cd /opt
+
+$ ls
+
+/opt # ls
+
+kafka             kafka_2.12-2.4.0  overrides
+
+$ cd kafka
+
+/opt/kafka_2.12-2.4.0 # ls
+
+LICENSE    NOTICE     bin        config     libs       logs       site-docs
+
+/opt/kafka_2.12-2.4.0 # ./bin/kafka-topics.sh --create --zookeeper "zookeeper:2181" --replication-factor 1 --partitions 1 --topic channel - создадим топик channel
+
+Created topic channel.
+
+/opt/kafka_2.12-2.4.0 # ./bin/kafka-topics.sh --list --zookeeper "zookeeper:2181" - вывести листинг топиков
+
+channel
+
+/opt/kafka_2.12-2.4.0 # ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic channel --from-beginning –  в качестве потребителя выберем консоль, подписываемся на топик channel
+Стартуем продьюсера, почле чего получаем:
+some sent data
